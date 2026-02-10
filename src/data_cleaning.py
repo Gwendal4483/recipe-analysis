@@ -19,6 +19,14 @@ def nettoyer_donnees(df):
         "['nan']", np.nan
     )
 
+    print("\n valeur aberrantes")
+    #on a des recettes avec des temps de préparation ou de cuisson très élevés, on va les filtrer 
+    df_clean = df_clean[
+        (df_clean['cooking_time_minutes'] <= 300) &
+        (df_clean['prep_time_minutes'] <= 120)
+    ]
+    
+
     print("\n2. Création des catégories alimentaires...")
 
     df_clean['is_vegetarian'] = df_clean['dietary_restrictions'].apply(
